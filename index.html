@@ -12,10 +12,10 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	</head>
 	<body>
-		<main class="content">
-			<label class="input-label" for="input">Expression</label>
-			<input class="input" id="input" placeholder="x+y"/>
-			<button class="input-button"><span class="icon material-icons">done</span>Verify</button>
-		</main>
+		<form class="form" autocomplete="off">
+			<label for="expr" class="input-label">Expression</label>
+			<input type="text" name="expr" class="input" id="expr" placeholder="x+y" required/>
+			<button type="submit" class="input-button"><span class="icon material-icons">done</span>Verify</button>
+		</form>
 	</body>
 </html>
