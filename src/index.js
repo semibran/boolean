@@ -1,7 +1,7 @@
 import parse from "./lib/parse"
 import id from "./lib/bitstr"
 
-let form = document.querySelector(".form")
+let form = document.querySelector(".section.-form")
 let input1 = document.querySelector("#expr1")
 let input2 = document.querySelector("#expr2")
 
@@ -13,3 +13,6 @@ form.onsubmit = event => {
 	console.log(id1, id2)
 	event.preventDefault()
 }
+
+let year = document.querySelector("#year")
+year.innerText = new Date().getFullYear()
