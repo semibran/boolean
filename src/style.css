@@ -5,11 +5,19 @@
 }
 
 body {
-	display: flex;
-	justify-content: center;
-	min-height: 100vh;
 	background: #eee;
 	font-family: "Work Sans", sans-serif;
+}
+
+.bg {
+	height: 320px;
+	top: 0;
+	position: fixed;
+	z-index: -1;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .title {
@@ -20,14 +28,13 @@ body {
 .description {
 	color: #666;
 	line-height: 1.5;
-	padding-bottom: 20px;
-	border-bottom: thin solid #999;
-	margin-bottom: 64px;
 }
 
 .content {
+	background: white;
 	max-width: 512px;
-	margin: 64px 16px;
+	margin-top: 320px;
+	padding: 32px 16px;
 }
 
 .form {
