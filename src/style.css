@@ -131,8 +131,7 @@ body {
 	outline: 0;
 	border: thin solid #999;
 	border-radius: 4px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
-	transition: 0.15s border-color;
+	transition: 0.15s border-color, 0.15s box-shadow;
 }
 
 .input::placeholder {
@@ -146,6 +145,7 @@ body {
 
 .input:focus {
 	border-color: dodgerblue;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
 }
 
 .input-error:not(:empty) + .input {
@@ -178,6 +178,7 @@ body {
 	background: #3a6;
 	margin-top: 4px;
 	padding-right: 6px;
+	outline: 0;
 	border: 0;
 	border-radius: 24px;
 	margin-left: auto;
@@ -190,7 +191,6 @@ body {
 }
 
 .input-button:focus {
-	outline: 0;
 	border: 2px solid dodgerblue;
 }
 
