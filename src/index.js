@@ -60,6 +60,9 @@ function validate(expr) {
 	} catch (err) {
 		expr.token = err
 	}
+	if (!(expr.token instanceof Error) && id(expr.token).length > Math.pow(2, 8)) {
+		expr.token = new Error("Maximum number of vars is 8")
+	}
 	if (expr.token instanceof Error) {
 		error.innerHTML = "&times; " + colonslice(expr.token.message)
 	} else {
