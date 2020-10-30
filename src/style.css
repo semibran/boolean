@@ -57,7 +57,8 @@ body {
 	flex: 1;
 	text-align: center;
 	padding: 16px 0 13px 0;
-	color: #999;
+	color: #ccc;
+	cursor: not-allowed;
 }
 
 .tab.-selected {
@@ -86,6 +87,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	width: 100%;
 }
 
 .input-error {
@@ -248,7 +250,6 @@ body {
 	position: fixed;
 	z-index: -1;
 	padding: 16px;
-	background: #eee;
 	color: #666;
 	text-align: center;
 }

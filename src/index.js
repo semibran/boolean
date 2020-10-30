@@ -61,7 +61,7 @@ function validate(expr) {
 		expr.token = err
 	}
 	if (expr.token instanceof Error) {
-		error.innerText = colonslice(expr.token.message)
+		error.innerHTML = "&times; " + colonslice(expr.token.message)
 	} else {
 		error.innerText = ""
 	}
