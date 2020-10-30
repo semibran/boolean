@@ -53,6 +53,10 @@ module.exports = function parse(str) {
 
 		if (chr === ")") {
 			// find closest open paren
+			if (node[0] === "or") {
+				throw new Error("Failed to parse boolean expression " + str
+				+ ": Cannot terminate an incomplete OR clause")
+			}
 			let token = null
 			while (stack.length && (!token || token[0] !== "grp")) {
 				token = stack.pop()
@@ -95,6 +99,10 @@ module.exports = function parse(str) {
 		if (chr === "+") {
 			// create token: OR with highest level non-grouped parent
 			// point to OR node
+			if (node[0] === "grp" && node.length === 1) {
+				throw new Error("Failed to parse boolean expression " + str
+					+ ": Cannot OR an lparen")
+			}
 			if (node[0] === "or" && node.length === 2) {
 				throw new Error("Failed to parse boolean expression " + str
 					+ ": Cannot OR an incomplete OR clause")
@@ -154,7 +162,7 @@ module.exports = function parse(str) {
 		throw new Error("Failed to parse boolean expression " + str
 			+ ": Incomplete OR clause")
 	}
-	if (token[0] === "grp" || stack[stack.length - 1][0] === "grp") {
+	if (stack.find(token => token[0] === "grp")) {
 		throw new Error("Failed to parse boolean expression " + str
 			+ ": Unterminated group")
 	}
