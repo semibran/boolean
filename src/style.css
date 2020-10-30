@@ -126,6 +126,7 @@ body {
 	font-family: "Source Code Pro", monospace;
 	font-size: 1.5em;
 	color: #333;
+	background: #f6f6f6;
 	padding: 16px 20px;
 	margin-bottom: 16px;
 	outline: 0;
@@ -135,7 +136,7 @@ body {
 }
 
 .input::placeholder {
-	color: #ccc;
+	color: #bbb;
 	transition: 0.2s color;
 }
 
