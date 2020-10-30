@@ -1,1 +1,336 @@
-(()=>{var M=Object.create,m=Object.defineProperty,A=Object.getPrototypeOf,H=Object.prototype.hasOwnProperty,I=Object.getOwnPropertyNames,P=Object.getOwnPropertyDescriptor,_=t=>m(t,"__esModule",{value:!0}),f=(t,n)=>()=>(n||(n={exports:{}},t(n.exports,n)),n.exports),$=(t,n,e)=>{if(_(t),typeof n=="object"||typeof n=="function")for(let r of I(n))!H.call(t,r)&&r!=="default"&&m(t,r,{get:()=>n[r],enumerable:!(e=P(n,r))||e.enumerable});return t},x=t=>t&&t.__esModule?t:$(m(M(A(t)),"default",{value:t,enumerable:!0}),t),N=f((J,y)=>{const E=!1;y.exports=function(n){let e=[];for(let s=0;s<n.length;s++){let o=n[s];if(o===" ")continue;E&&console.log(o,e);let l=e[e.length-1],a=e[e.length-2];if(!l&&o!=="("&&o!==")"){if(o==="'")throw new Error("Failed to parse boolean expression "+n+": Cannot NOT an undefined clause");if(o==="+")throw new Error("Failed to parse boolean expression "+n+": Cannot OR an undefined clause");e.push(o);continue}if(o==="("){if(l)if(l[0]==="grp"&&l.length===1||l[0]==="or"&&l.length===2){let i=["grp"];e.push(i),l.push(i)}else{let i=["grp"],u=["and",l,i];e[e.length-1]=u,e.push(i),a&&(a[a.length-1]=u)}else{let i=["grp"];e.push(i)}continue}if(o===")"){let i=null;for(;e.length&&(!i||i[0]!=="grp");)i=e.pop();if(!i||i[0]!=="grp")throw new Error("Failed to parse boolean expression "+n+": Cannot terminate an undefined clause");if(!i[1])throw new Error("Failed to parse boolean expression "+n+": Cannot parse an empty group");E&&console.log("ended group",i),e.push(i[1]),a=e[e.length-2],a&&(a[a.length-1]=i[1]);continue}if(o==="'"){if(l[0]==="or"&&l.length===2)throw new Error("Failed to parse boolean expression "+n+": Cannot NOT an incomplete OR clause");if(l[0]==="grp")throw new Error("Failed to parse boolean expression "+n+": Cannot NOT an lparen");let i=["not",l];e[e.length-1]=i,a&&(a[a.length-1]=i);continue}if(o==="+"){if(l[0]==="or"&&l.length===2)throw new Error("Failed to parse boolean expression "+n+": Cannot OR an incomplete OR clause");let i=null,u=null,c=e.length;for(;c;)if(i=e[--c],i[0]==="grp"){u=i,i=i[1];break}let w=["or",i];u?(e.length=c+1,e.push(w),u[u.length-1]=w):(e.length=c,e.push(w));continue}if(l[0]==="or"&&l.length===2){l.push(o),e.push(o);continue}if(l[0]==="grp"&&l.length===1){l.push(o),e.push(o);continue}let v=["and",l,o];e[e.length-1]=v,e.push(o),a&&(a[a.length-1]=v)}let r=e[0];if(r[0]==="or"&&r.length===2)throw new Error("Failed to parse boolean expression "+n+": Incomplete OR clause");if(r[0]==="grp"||e[e.length-1][0]==="grp")throw new Error("Failed to parse boolean expression "+n+": Unterminated group");return r}}),q=f((K,O)=>{O.exports=function(n){let e=h(n),r=[];for(let s of e){if(r.indexOf(s)>=0)continue;r.push(s)}return r.sort()};function h(t){if(!isNaN(Number(t)))return[];if(typeof t=="string")return[t];let[n,e,r]=t;return n==="not"?h(e):h(e).concat(h(r))}}),F=f((Q,T)=>{const j=q();T.exports=function(token){let str=p(token),args=j(token);return eval("("+args.join(",")+")=>"+str)};function p(t,n){if(typeof t=="string")return t;let[e,r,s]=t;if(e==="not")return"!"+p(r,e);if(e==="and"){let o=p(r,e)+"&&"+p(s,e);return n==="not"?`(${o})`:o}if(e==="or"){let o=p(r,e)+"||"+p(s,e);return n==="not"||n==="and"?`(${o})`:o}}}),S=f((V,R)=>{const G=F();R.exports=function(n){let e="",r=G(n),s=Math.pow(2,r.length);for(let o=0;o<s;o++){let l=o.toString(2);for(;l.length<r.length;)l="0"+l;let a=l.split("").map(Number);e+=Number(r(...a))}return e}});const C=x(N()),g=x(S()),U=document.querySelector(".section.-form"),d=document.querySelector(".output-box"),L=document.querySelector(".output");let k={expr1:{token:null,input:document.querySelector("#expr1"),error:document.querySelector(".input-error.-expr1")},expr2:{token:null,input:document.querySelector("#expr2"),error:document.querySelector(".input-error.-expr2")}};D(k.expr1);D(k.expr2);U.onsubmit=t=>{const{expr1:n,expr2:e}=k;if(t.preventDefault(),b(n),b(e),n.token instanceof Error||e.token instanceof Error)return;let r=g.default(n.token),s=g.default(e.token);r===s?(d.classList.remove("-incorrect"),d.classList.add("-correct","-result"),L.innerHTML=n.input.value+" = "+e.input.value):(d.classList.remove("-correct"),d.classList.add("-incorrect","-result"),L.innerHTML=n.input.value+" &NotEqual; "+e.input.value)};function D(t){const{input:n,error:e}=t,r=s=>e.innerText="";n.onblur=s=>b(t),n.onkeypress=r,n.onpaste=r,n.oninput=r}function b(t){const{input:n,error:e}=t;if(!n.value)t.token="";else try{t.token=C.default(n.value)}catch(r){t.token=r}t.token&&!(t.token instanceof Error)&&g.default(t.token).length>Math.pow(2,8)&&(t.token=new Error("Maximum number of vars is 8")),t.token instanceof Error?e.innerHTML="&times; "+Y(t.token.message):e.innerText=""}function Y(t){for(var n=t.length;n&&!(t[--n]===":"););return n?t.slice(n+2,t.length):t}let z=document.querySelector("#year");z.innerText=new Date().getFullYear();})();
+(() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+  var __commonJS = (callback, module) => () => {
+    if (!module) {
+      module = {exports: {}};
+      callback(module.exports, module);
+    }
+    return module.exports;
+  };
+  var __exportStar = (target, module, desc) => {
+    __markAsModule(target);
+    if (typeof module === "object" || typeof module === "function") {
+      for (let key of __getOwnPropNames(module))
+        if (!__hasOwnProp.call(target, key) && key !== "default")
+          __defProp(target, key, {get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule = (module) => {
+    if (module && module.__esModule)
+      return module;
+    return __exportStar(__defProp(__create(__getProtoOf(module)), "default", {value: module, enumerable: true}), module);
+  };
+
+  // src/lib/parse.js
+  var require_parse = __commonJS((exports, module) => {
+    const debug = false;
+    module.exports = function parse3(str) {
+      let stack = [];
+      for (let i = 0; i < str.length; i++) {
+        let chr = str[i];
+        if (chr === " ")
+          continue;
+        if (debug)
+          console.log(chr, stack);
+        let node = stack[stack.length - 1];
+        let parent = stack[stack.length - 2];
+        if (!node && chr !== "(" && chr !== ")") {
+          if (chr === "'") {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot NOT an undefined clause");
+          }
+          if (chr === "+") {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot OR an undefined clause");
+          }
+          stack.push(chr);
+          continue;
+        }
+        if (chr === "(") {
+          if (!node) {
+            let grp = ["grp"];
+            stack.push(grp);
+          } else if (node[0] === "grp" && node.length === 1 || node[0] === "or" && node.length === 2) {
+            let grp = ["grp"];
+            stack.push(grp);
+            node.push(grp);
+          } else {
+            let grp = ["grp"];
+            let and2 = ["and", node, grp];
+            stack[stack.length - 1] = and2;
+            stack.push(grp);
+            if (parent)
+              parent[parent.length - 1] = and2;
+          }
+          continue;
+        }
+        if (chr === ")") {
+          let token2 = null;
+          while (stack.length && (!token2 || token2[0] !== "grp")) {
+            token2 = stack.pop();
+          }
+          if (!token2 || token2[0] !== "grp") {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot terminate an undefined clause");
+          }
+          if (!token2[1]) {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot parse an empty group");
+          }
+          if (debug)
+            console.log("ended group", token2);
+          stack.push(token2[1]);
+          parent = stack[stack.length - 2];
+          if (parent)
+            parent[parent.length - 1] = token2[1];
+          continue;
+        }
+        if (chr === "'") {
+          if (node[0] === "or" && node.length === 2) {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot NOT an incomplete OR clause");
+          }
+          if (node[0] === "grp") {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot NOT an lparen");
+          }
+          let not = ["not", node];
+          stack[stack.length - 1] = not;
+          if (parent)
+            parent[parent.length - 1] = not;
+          continue;
+        }
+        if (chr === "+") {
+          if (node[0] === "or" && node.length === 2) {
+            throw new Error("Failed to parse boolean expression " + str + ": Cannot OR an incomplete OR clause");
+          }
+          let parent2 = null;
+          let group = null;
+          let i2 = stack.length;
+          while (i2) {
+            parent2 = stack[--i2];
+            if (parent2[0] === "grp") {
+              group = parent2;
+              parent2 = parent2[1];
+              break;
+            }
+          }
+          let or = ["or", parent2];
+          if (!group) {
+            stack.length = i2;
+            stack.push(or);
+          } else {
+            stack.length = i2 + 1;
+            stack.push(or);
+            group[group.length - 1] = or;
+          }
+          continue;
+        }
+        if (node[0] === "or" && node.length === 2) {
+          node.push(chr);
+          stack.push(chr);
+          continue;
+        }
+        if (node[0] === "grp" && node.length === 1) {
+          node.push(chr);
+          stack.push(chr);
+          continue;
+        }
+        let and = ["and", node, chr];
+        stack[stack.length - 1] = and;
+        stack.push(chr);
+        if (parent)
+          parent[parent.length - 1] = and;
+      }
+      let token = stack[0];
+      if (token[0] === "or" && token.length === 2) {
+        throw new Error("Failed to parse boolean expression " + str + ": Incomplete OR clause");
+      }
+      if (token[0] === "grp" || stack[stack.length - 1][0] === "grp") {
+        throw new Error("Failed to parse boolean expression " + str + ": Unterminated group");
+      }
+      return token;
+    };
+  });
+
+  // src/lib/args.js
+  var require_args = __commonJS((exports, module) => {
+    module.exports = function reduceargs(token) {
+      let vars = reducevars(token);
+      let args = [];
+      for (let v of vars) {
+        if (args.indexOf(v) >= 0)
+          continue;
+        args.push(v);
+      }
+      return args.sort();
+    };
+    function reducevars(token) {
+      if (!isNaN(Number(token)))
+        return [];
+      if (typeof token === "string")
+        return [token];
+      let [type, x, y] = token;
+      if (type === "not")
+        return reducevars(x);
+      return reducevars(x).concat(reducevars(y));
+    }
+  });
+
+  // src/lib/fn.js
+  var require_fn = __commonJS((exports, module) => {
+    const reduceargs = require_args();
+    module.exports = function fnify(token) {
+      let str = strify(token);
+      let args = reduceargs(token);
+      return eval("(" + args.join(",") + ")=>" + str);
+    };
+    function strify(token, parent) {
+      if (!Array.isArray(token))
+        return token;
+      let [type, x, y] = token;
+      if (type === "not") {
+        return "!" + strify(x, type);
+      }
+      if (type === "and") {
+        let and = strify(x, type) + "&&" + strify(y, type);
+        if (parent === "not") {
+          return `(${and})`;
+        } else {
+          return and;
+        }
+      }
+      if (type === "or") {
+        let or = strify(x, type) + "||" + strify(y, type);
+        if (parent === "not" || parent === "and") {
+          return `(${or})`;
+        } else {
+          return or;
+        }
+      }
+    }
+  });
+
+  // src/lib/bitstr.js
+  var require_bitstr = __commonJS((exports, module) => {
+    const fnify = require_fn();
+    module.exports = function bitstr2(token) {
+      let bits = "";
+      let fn = fnify(token);
+      let perms = Math.pow(2, fn.length);
+      for (let i = 0; i < perms; i++) {
+        let str = i.toString(2);
+        while (str.length < fn.length) {
+          str = "0" + str;
+        }
+        let argv = str.split("").map(Number);
+        bits += Number(fn(...argv));
+      }
+      return bits;
+    };
+  });
+
+  // src/lib/equals.js
+  var require_equals = __commonJS((exports, module) => {
+    const args = require_args();
+    const bitstr2 = require_bitstr();
+    module.exports = function equals3(token1, token2) {
+      let args1 = args(token1);
+      let args2 = args(token2);
+      while (args1.length < args2.length) {
+        let arg = args2.find((arg2) => !args1.includes(arg2));
+        token1 = addarg(token1, arg);
+        args1.push(arg);
+      }
+      while (args2.length < args1.length) {
+        let arg = args1.find((arg2) => !args2.includes(arg2));
+        token2 = addarg(token2, arg);
+        args2.push(arg);
+      }
+      return parseInt(bitstr2(token1), 2) === parseInt(bitstr2(token2), 2);
+    };
+    function addarg(token, arg) {
+      return ["and", ["or", 1, arg], token];
+    }
+  });
+
+  // src/index.js
+  const parse = __toModule(require_parse());
+  const equals = __toModule(require_equals());
+  const bitstr = __toModule(require_bitstr());
+  const form = document.querySelector(".section.-form");
+  const outputbox = document.querySelector(".output-box");
+  const output = document.querySelector(".output");
+  let state = {
+    expr1: {
+      token: null,
+      input: document.querySelector("#expr1"),
+      error: document.querySelector(".input-error.-expr1")
+    },
+    expr2: {
+      token: null,
+      input: document.querySelector("#expr2"),
+      error: document.querySelector(".input-error.-expr2")
+    }
+  };
+  listen(state.expr1);
+  listen(state.expr2);
+  form.onsubmit = (event) => {
+    const {expr1, expr2} = state;
+    event.preventDefault();
+    validate(expr1);
+    validate(expr2);
+    if (expr1.token instanceof Error || expr2.token instanceof Error) {
+      return;
+    }
+    if (equals.default(expr1.token, expr2.token)) {
+      outputbox.classList.remove("-incorrect");
+      outputbox.classList.add("-correct", "-result");
+      output.innerHTML = expr1.input.value + " = " + expr2.input.value;
+    } else {
+      outputbox.classList.remove("-correct");
+      outputbox.classList.add("-incorrect", "-result");
+      output.innerHTML = expr1.input.value + " &NotEqual; " + expr2.input.value;
+    }
+  };
+  function listen(expr) {
+    const {input, error} = expr;
+    const clear = (_) => error.innerText = "";
+    input.onblur = (_) => validate(expr);
+    input.onkeypress = clear;
+    input.onpaste = clear;
+    input.oninput = clear;
+  }
+  function validate(expr) {
+    const {input, error} = expr;
+    if (!input.value) {
+      expr.token = "";
+    } else
+      try {
+        expr.token = parse.default(input.value);
+      } catch (err) {
+        expr.token = err;
+      }
+    if (expr.token && !(expr.token instanceof Error) && bitstr.default(expr.token).length > Math.pow(2, 8)) {
+      expr.token = new Error("Maximum number of vars is 8");
+    }
+    if (expr.token instanceof Error) {
+      error.innerHTML = "&times; " + colonslice(expr.token.message);
+    } else {
+      error.innerText = "";
+    }
+  }
+  function colonslice(str) {
+    for (var i = str.length; i; ) {
+      if (str[--i] === ":")
+        break;
+    }
+    if (!i)
+      return str;
+    return str.slice(i + 2, str.length);
+  }
+  let year = document.querySelector("#year");
+  year.innerText = new Date().getFullYear();
+})();
+//# sourceMappingURL=index.js.map
