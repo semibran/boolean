@@ -1,0 +1,18 @@
+{
+  "name": "boolean",
+  "version": "0.0.0",
+  "description": "boolean expression parser frontend",
+  "repository": "semibran/boolean",
+  "author": "semibran",
+  "license": "MIT",
+  "main": "src/index.js",
+  "keywords": [],
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "chokidar-cli": "^2.1.0",
+    "clean-css-cli": "^4.3.0",
+    "esbuild": "^0.8.0",
+    "html-minifier": "^4.0.0",
+    "postcss": "^8.1.4"
+  }
+}
