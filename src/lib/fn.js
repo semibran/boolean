@@ -7,7 +7,7 @@ module.exports = function fnify(token) {
 }
 
 function strify(token, parent) {
-	if (typeof token === "string") return token
+	if (!Array.isArray(token)) return token
 	let [ type, x, y ] = token
 	if (type === "not") {
 		return "!" + strify(x, type)

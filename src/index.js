@@ -1,4 +1,5 @@
 import parse from "./lib/parse"
+import equals from "./lib/equals"
 import id from "./lib/bitstr"
 
 const form = document.querySelector(".section.-form")
@@ -29,9 +30,7 @@ form.onsubmit = event => {
 	if (expr1.token instanceof Error || expr2.token instanceof Error) {
 		return
 	}
-	let id1 = id(expr1.token)
-	let id2 = id(expr2.token)
-	if (id1 === id2) {
+	if (equals(expr1.token, expr2.token)) {
 		outputbox.classList.remove("-incorrect")
 		outputbox.classList.add("-correct", "-result")
 		output.innerHTML = expr1.input.value + " = " + expr2.input.value

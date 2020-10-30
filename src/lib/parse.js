@@ -2,9 +2,8 @@ const debug = false
 
 // parse(str) -> expr
 // > Parses a string into a boolean expression.
-// > A boolean expression is a list of tokens.
-// > Ideally, these token lists should be
-// > able to be converted into functions.
+// > A boolean expression is a token tree,
+// > eg. [ not|and|or, x, y? ]
 module.exports = function parse(str) {
 	let stack = []
 	for (let i = 0; i < str.length; i++) {
