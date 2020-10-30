@@ -22,10 +22,16 @@
 				<div class="tab -table">Truth table</div>
 			</header>
 			<form class="section -form" autocomplete="off">
-				<label for="expr1" class="input-label">Expression 1</label>
-				<input id="expr1" class="input" type="text" placeholder="x'y'" required/>
-				<label for="expr2" class="input-label">Expression 2</label>
-				<input id="expr2" class="input" type="text" placeholder="(x+y)'" required/>
+				<div class="input-wrap">
+					<label for="expr1" class="input-label">Expression 1</label>
+					<span class="input-error -expr1"></span>
+					<input id="expr1" class="input" type="text" placeholder="x'y'" required/>
+				</div>
+				<div class="input-wrap">
+					<label for="expr2" class="input-label">Expression 2</label>
+					<span class="input-error -expr2"></span>
+					<input id="expr2" class="input" type="text" placeholder="(x+y)'" required/>
+				</div>
 				<button type="submit" class="input-button"><span class="icon material-icons">done</span>Verify</button>
 			</form>
 			<section class="section -output">
