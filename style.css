@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: #eee;
+	font-family: "Work Sans", sans-serif;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.input-label {
+	color: #999;
+	line-height: 1.5;
+	font-weight: 700;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.input {
+	font-family: "Source Code Pro", monospace;
+	font-size: 2em;
+	padding: 16px 24px;
+	color: #333;
+	border: thin solid #999;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
+	transition: 0.2s border-color;
+}
+
+.input:focus {
+	border-color: dodgerblue;
+	outline: 0;
+}
+
+.input::placeholder {
+	color: #999;
+}
+
+.input:focus::placeholder {
+	color: dodgerblue;
+}
