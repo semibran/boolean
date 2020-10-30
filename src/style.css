@@ -7,7 +7,6 @@
 body {
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	min-height: 100vh;
 	background: #eee;
 	font-family: "Work Sans", sans-serif;
@@ -23,17 +22,19 @@ body {
 	line-height: 1.5;
 	padding-bottom: 20px;
 	border-bottom: thin solid #999;
-	margin-bottom: 24px;
+	margin-bottom: 64px;
 }
 
 .content {
 	max-width: 512px;
+	margin: 64px 16px;
 }
 
 .form {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	margin-bottom: 16px;
 }
 
 .input-label {
@@ -95,7 +96,6 @@ body {
 	border: 0;
 	border-radius: 24px;
 	margin-left: auto;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
 	transition: 0.15s background;
 }
 
@@ -107,4 +107,25 @@ body {
 .input-button:focus {
 	outline: 0;
 	border: 2px solid dodgerblue;
+}
+
+.section-title {
+	color: #999;
+	font-size: 1em;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin-bottom: 4px;
+}
+
+.output-box {
+	height: 160px;
+	border: thin solid #999;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.output-text {
+	color: #999;
 }

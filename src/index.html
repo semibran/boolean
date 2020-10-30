@@ -6,10 +6,10 @@
 		<meta name="description" content="boolean expression parser frontend"/>
 		<meta name="author" content="semibran (Brandon Semilla)"/>
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1"/>
-		<script defer src="./index.js"></script>
-		<link href="./style.css" rel="stylesheet"/>
 		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="./style.css" rel="stylesheet"/>
+		<script defer src="./index.js"></script>
 	</head>
 	<body>
 		<main class="content">
@@ -22,6 +22,12 @@
 				<input id="expr2" class="input" type="text" placeholder="(x+y)'" required/>
 				<button type="submit" class="input-button"><span class="icon material-icons">done</span>Verify</button>
 			</form>
+			<section>
+				<h3 class="section-title">Output</h3>
+				<div class="output-box">
+					<span class="output-text">Waiting for input...</span>
+				</div>
+			</section>
 		</main>
 	</body>
 </html>
