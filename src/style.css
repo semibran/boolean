@@ -6,15 +6,16 @@
 
 .link {
 	text-decoration: none;
-	color: #ccc;
-}
-
-.link:hover {
 	color: #999;
 }
 
+.link:hover {
+	color: #666;
+}
+
 body {
-	background: #333;
+	min-height: 100vh;
+	background: #f1f1f1;
 	font-family: "Work Sans", sans-serif;
 }
 
@@ -30,12 +31,12 @@ body {
 }
 
 .title {
-	color: white;
+	color: #333;
 	margin-bottom: 4px;
 }
 
 .description {
-	color: #ccc;
+	color: #666;
 	line-height: 1.5;
 }
 
@@ -43,6 +44,7 @@ body {
 	background: white;
 	max-width: 512px;
 	margin-top: 320px;
+	margin-bottom: 48px;
 }
 
 .tabs {
@@ -68,18 +70,15 @@ body {
 }
 
 .section.-form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	padding-top: 32px;
 }
 
 .section.-output {
 	padding-top: 8px;
-	padding-bottom: 64px;
-}
-
-.form {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+	padding-bottom: 32px;
 }
 
 .input-label {
@@ -93,7 +92,7 @@ body {
 	width: 100%;
 	height: 64px;
 	font-family: "Source Code Pro", monospace;
-	font-size: 2em;
+	font-size: 1.5em;
 	color: #333;
 	padding: 16px 20px;
 	margin-bottom: 16px;
@@ -164,20 +163,55 @@ body {
 
 .output-box {
 	height: 160px;
-	border: thin solid #999;
+	color: #ccc;
+	border: thin solid #ccc;
 	border-radius: 8px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 }
 
-.output-text {
-	color: #999;
+.output-box.-result .output {
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family: "Source Code Pro", monospace;
+}
+
+.output-box.-result .output::after {
+	display: block;
+	line-height: 2;
+	font-size: 0.75rem;
+	font-weight: normal;
+	font-family: "Work Sans", sans-serif;
+}
+
+.output-box.-correct {
+	border-color: #3a6;
+	color: #3a6;
+}
+
+.output-box.-correct .output::after {
+	content: "These expressions are equivalent.";
+}
+
+.output-box.-incorrect {
+	border-color: #f36;
+	color: #f36;
+}
+
+.output-box.-incorrect .output::after {
+	content: "These expressions are not equivalent.";
 }
 
 .footer {
+	width: 100%;
+	height: 48px;
+	bottom: 0;
+	position: fixed;
+	z-index: -1;
 	padding: 16px;
-	background: #333;
-	color: white;
+	background: #eee;
+	color: #666;
 	text-align: center;
 }
