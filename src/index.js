@@ -2,70 +2,68 @@ import parse from "./lib/parse"
 import id from "./lib/bitstr"
 
 const form = document.querySelector(".section.-form")
-const input1 = document.querySelector("#expr1")
-const input2 = document.querySelector("#expr2")
-const error1 = document.querySelector(".input-error.-expr1")
-const error2 = document.querySelector(".input-error.-expr2")
 const outputbox = document.querySelector(".output-box")
 const output = document.querySelector(".output")
 
-let token1 = null
-let token2 = null
+let state = {
+	expr1: {
+		token: null,
+		input: document.querySelector("#expr1"),
+		error: document.querySelector(".input-error.-expr1")
+	},
+	expr2: {
+		token: null,
+		input: document.querySelector("#expr2"),
+		error: document.querySelector(".input-error.-expr2")
+	}
+}
 
-input1.onkeypress = input1.onpaste = input1.oninput = _ => error1.innerText = ""
-input2.onkeypress = input2.onpaste = input2.oninput = _ => error2.innerText = ""
-input1.onblur = updateInput1
-input2.onblur = updateInput2
+listen(state.expr1)
+listen(state.expr2)
 
 form.onsubmit = event => {
+	const { expr1, expr2 } = state
 	event.preventDefault()
-	updateInput1()
-	updateInput2()
-	if (token1 instanceof Error || token2 instanceof Error) return
-	let id1 = id(token1)
-	let id2 = id(token2)
+	validate(expr1)
+	validate(expr2)
+	if (expr1.token instanceof Error || expr2.token instanceof Error) {
+		return
+	}
+	let id1 = id(expr1.token)
+	let id2 = id(expr2.token)
 	if (id1 === id2) {
 		outputbox.classList.remove("-incorrect")
 		outputbox.classList.add("-correct", "-result")
-		output.innerHTML = input1.value + " = " + input2.value
+		output.innerHTML = expr1.input.value + " = " + expr2.input.value
 	} else {
 		outputbox.classList.remove("-correct")
 		outputbox.classList.add("-incorrect", "-result")
-		output.innerHTML = input1.value + " &NotEqual; " + input2.value
+		output.innerHTML = expr1.input.value + " &NotEqual; " + expr2.input.value
 	}
 }
 
-function updateInput1() {
-	if (!input1.value) {
-		token1 = ""
-	} else {
-		try {
-			token1 = parse(input1.value)
-		} catch (err) {
-			token1 = err
-		}
-	}
-	if (token1 instanceof Error) {
-		error1.innerText = colonslice(token1.message)
-	} else {
-		error1.innerText = ""
-	}
+function listen(expr) {
+	const { input, error } = expr
+	const clear = _ => error.innerText = ""
+	input.onblur = _ => validate(expr)
+	input.onkeypress = clear
+	input.onpaste = clear
+	input.oninput = clear
 }
 
-function updateInput2() {
-	if (!input2.value) {
-		token2 = ""
-	} else {
-		try {
-			token2 = parse(input2.value)
-		} catch (err) {
-			token2 = err
-		}
+function validate(expr) {
+	const { input, error } = expr
+	if (!input.value) {
+		expr.token = ""
+	} else try {
+		expr.token = parse(input.value)
+	} catch (err) {
+		expr.token = err
 	}
-	if (token2 instanceof Error) {
-		error2.innerText = colonslice(token2.message)
+	if (expr.token instanceof Error) {
+		error.innerText = colonslice(expr.token.message)
 	} else {
-		error2.innerText = ""
+		error.innerText = ""
 	}
 }
 
