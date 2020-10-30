@@ -99,7 +99,7 @@ body {
 	border: thin solid #999;
 	border-radius: 4px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
-	transition: 0.2s border-color;
+	transition: 0.15s border-color;
 }
 
 .input:focus {
@@ -108,7 +108,7 @@ body {
 }
 
 .input::placeholder {
-	color: #999;
+	color: #ccc;
 	transition: 0.2s color;
 }
 
