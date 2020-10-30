@@ -27,10 +27,11 @@ body {
 }
 
 .input {
+	height: 64px;
 	font-family: "Source Code Pro", monospace;
 	font-size: 2em;
 	color: #333;
-	padding: 16px 24px;
+	padding: 16px 20px;
 	margin-bottom: 8px;
 	border: thin solid #999;
 	border-radius: 4px;
@@ -54,19 +55,37 @@ body {
 
 .input:placeholder-shown + .input-button {
 	background: #ccc;
+	pointer-events: none;
+}
+
+.input-button .icon {
+	margin-right: 6px;
 }
 
 .input-button {
-	width: 128px;
+	width: 112px;
 	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-family: "Work Sans";
 	font-size: 1em;
-	font-weight: bold;
-	text-transform: uppercase;
+	color: white;
+	background: #3a6;
+	padding-right: 6px;
 	border: 0;
 	border-radius: 24px;
 	margin-left: auto;
-	background: dodgerblue;
-	color: white;
-	transition: 0.2s background;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
+	transition: 0.15s background;
+}
+
+.input-button:hover {
+	cursor: pointer;
+	background: #295; /* #0e80f7; */
+}
+
+.input-button:focus {
+	outline: 0;
+	border: 2px solid dodgerblue;
 }
