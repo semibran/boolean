@@ -208,6 +208,7 @@ body {
 	color: #ccc;
 	border: thin solid #ccc;
 	border-radius: 8px;
+	padding: 16px 32px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
