@@ -43,7 +43,7 @@ body {
 
 .content {
 	background: white;
-	max-width: 512px;
+	max-width: 480px;
 	position: relative;
 	top: 320px;
 	margin: 0 auto 48px;
@@ -69,7 +69,7 @@ body {
 }
 
 .section {
-	padding: 0 16px;
+	margin: 0 16px;
 }
 
 .section.-form {
@@ -248,10 +248,55 @@ body {
 .footer {
 	width: 100%;
 	height: 48px;
+	line-height: 48px;
 	bottom: 0;
 	position: fixed;
 	z-index: -1;
-	padding: 16px;
+	padding: 0 16px;
 	color: #666;
 	text-align: center;
+}
+
+@media (min-width: 480px) {
+	.hero {
+		max-width: 480px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.content {
+		border-radius: 4px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+		margin-bottom: 80px;
+	}
+
+	.section {
+		margin: 0 8%;
+	}
+
+	.section.-form {
+		padding-top: 48px;
+	}
+
+	.section.-output {
+		padding-bottom: 48px;
+	}
+
+	.footer {
+		height: 80px;
+		line-height: 80px;
+	}
+}
+
+@media (min-width: 512px) {
+	.hero {
+		padding: 0;
+	}
+}
+
+@media (min-width: 480px) and (min-height: 960px) {
+	.footer {
+		position: static;
+		margin-top: 320px;
+	}
 }
