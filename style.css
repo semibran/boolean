@@ -21,17 +21,17 @@ body {
 
 .input-label {
 	color: #999;
-	line-height: 1.5;
-	font-weight: 700;
 	text-transform: uppercase;
 	cursor: pointer;
+	margin-bottom: 4px;
 }
 
 .input {
 	font-family: "Source Code Pro", monospace;
 	font-size: 2em;
-	padding: 16px 24px;
 	color: #333;
+	padding: 16px 24px;
+	margin-bottom: 8px;
 	border: thin solid #999;
 	border-radius: 4px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125);
@@ -45,8 +45,28 @@ body {
 
 .input::placeholder {
 	color: #999;
+	transition: 0.2s color;
 }
 
 .input:focus::placeholder {
 	color: dodgerblue;
+}
+
+.input:placeholder-shown + .input-button {
+	background: #ccc;
+}
+
+.input-button {
+	width: 128px;
+	height: 48px;
+	font-family: "Work Sans";
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+	border: 0;
+	border-radius: 24px;
+	margin-left: auto;
+	background: dodgerblue;
+	color: white;
+	transition: 0.2s background;
 }
